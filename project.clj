@@ -1,10 +1,10 @@
-(defproject camasul/pretty "1.0.0"
+(defproject camsaul/pretty "1.0.0"
   :description "A standard protocol for making custom types in Clojure pretty print in the REPL and elsewhere."
-  :url "https://github.com/camasul/pretty"
+  :url "https://github.com/camsaul/pretty"
   :min-lein-version "2.5.0"
 
   :license {:name "Eclipse Public License"
-            :url "https://raw.githubusercontent.com/camasul/pretty/master/LICENSE"}
+            :url "https://raw.githubusercontent.com/camsaul/pretty/master/LICENSE"}
 
   :aliases
   {"test"                      ["with-profile" "+expectations" "expectations"]
