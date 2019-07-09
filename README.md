@@ -9,8 +9,10 @@
 A standard protocol for making custom types in Clojure pretty print in the REPL and elsewhere.
 
 ```clj
+(require '[pretty.core :as pretty])
+
 (defrecord MyInt [i]
-  PrettyPrintable
+  pretty/PrettyPrintable
   (pretty [_] (list 'my-int i)))
 
 (MyInt. 100)
