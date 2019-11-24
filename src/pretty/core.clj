@@ -40,6 +40,7 @@
   [s]
   (pprint/write-out (pretty s)))
 
-(doseq [method [print-method pprint/simple-dispatch]
-        tyype  [IRecord Map IPersistentMap ISeq]]
-  (prefer-method method pretty.core.PrettyPrintable tyype))
+(when-not *compile-files*
+  (doseq [method [print-method pprint/simple-dispatch]
+          tyype  [IRecord Map IPersistentMap ISeq]]
+    (prefer-method method pretty.core.PrettyPrintable tyype)))
