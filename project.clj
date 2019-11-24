@@ -1,4 +1,4 @@
-(defproject pretty "1.0.1"
+(defproject pretty "1.0.2"
   :description "A standard protocol for making custom types in Clojure pretty print in the REPL and elsewhere."
   :url "https://github.com/camsaul/pretty"
   :min-lein-version "2.5.0"
@@ -22,7 +22,7 @@
   :profiles
   {:dev
    {:dependencies
-    [[org.clojure/clojure "1.10.0"]
+    [[org.clojure/clojure "1.10.1"]
      [expectations "2.2.0-beta2"]]
 
     :injections
