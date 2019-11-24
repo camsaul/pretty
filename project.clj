@@ -1,4 +1,4 @@
-(defproject pretty "1.0.2"
+(defproject pretty "1.0.3"
   :description "A standard protocol for making custom types in Clojure pretty print in the REPL and elsewhere."
   :url "https://github.com/camsaul/pretty"
   :min-lein-version "2.5.0"

@@ -4,13 +4,7 @@
   (:import [clojure.lang IPersistentMap IRecord ISeq]
            java.util.Map))
 
-(defmacro ^:private ^{:style/indent 1} defprotocol-once
-  [proto-name & proto-body]
-  (if (ns-resolve *ns* proto-name)
-    :already-defined
-    `(defprotocol ~proto-name ~@proto-body)))
-
-(defprotocol-once PrettyPrintable
+(defprotocol PrettyPrintable
   "Implmement this protocol to return custom representations of objects when printing them. For best results, implement
   this protocol in the class declaration form (i.e., as part of the `defrecord`/`deftype`/`reify`/etc. form) rather
   than via `extend-protocol` or the like:
@@ -46,7 +40,6 @@
   [s]
   (pprint/write-out (pretty s)))
 
-(when-not *compile-files*
-  (doseq [method [print-method pprint/simple-dispatch]
-          tyype  [IRecord Map IPersistentMap ISeq]]
-    (prefer-method method pretty.core.PrettyPrintable tyype)))
+(doseq [method [print-method pprint/simple-dispatch]
+        tyype  [IRecord Map IPersistentMap ISeq]]
+  (prefer-method method pretty.core.PrettyPrintable tyype))
