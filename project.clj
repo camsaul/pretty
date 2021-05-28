@@ -1,4 +1,4 @@
-(defproject pretty "1.0.4"
+(defproject pretty "1.0.5"
   :description "A standard protocol for making custom types in Clojure pretty print in the REPL and elsewhere."
   :url "https://github.com/camsaul/pretty"
   :min-lein-version "2.5.0"
@@ -7,7 +7,7 @@
             :url "https://raw.githubusercontent.com/camsaul/pretty/master/LICENSE"}
 
   :aliases
-  {"test"                      ["with-profile" "+expectations" "expectations"]
+  {"test"                      ["with-profile" "+test" "test"]
    "bikeshed"                  ["with-profile" "+bikeshed" "bikeshed" "--max-line-length" "120"]
    "check-namespace-decls"     ["with-profile" "+check-namespace-decls" "check-namespace-decls"]
    "eastwood"                  ["with-profile" "+eastwood" "eastwood"]
@@ -16,24 +16,20 @@
    ;; `lein lint` will run all linters
    "lint"                      ["do" ["eastwood"] ["bikeshed"] ["check-namespace-decls"] ["docstring-checker"]]}
 
-  :dependencies
-  []
+  :dependencies []
 
   :profiles
   {:dev
    {:dependencies
-    [[org.clojure/clojure "1.10.1"]
-     [expectations "2.2.0-beta2"]]
+    [[org.clojure/clojure "1.10.3"]
+     [pjstadig/humane-test-output "0.10.0"]]
 
     :injections
-    [(require 'expectations)
-     ((resolve 'expectations/disable-run-on-shutdown))]
+    [(require 'pjstadig.humane-test-output)
+     (pjstadig.humane-test-output/activate!)]
 
     :jvm-opts
     ["-Xverify:none"]}
-
-   :expectations
-   {:plugins [[lein-expectations "0.0.8" :exclusions [expectations]]]}
 
    :eastwood
    {:plugins

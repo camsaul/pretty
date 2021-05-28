@@ -44,3 +44,19 @@
   (doseq [method [print-method pprint/simple-dispatch]
           tyype  [IRecord Map IPersistentMap ISeq]]
     (prefer-method method pretty.core.PrettyPrintable tyype)))
+
+(defn qualify-symbol-for-*ns*
+  "Change the namespace of `qualified-symb` to an appropriate alias for `*ns*` if one exists, or remove it entirely"
+  [qualified-symb]
+  (let [ns-symb-str (namespace qualified-symb)
+        symb-str    (name qualified-symb)
+        orig-ns     (the-ns (symbol ns-symb-str))]
+    (if (= *ns* orig-ns)
+      (symbol symb-str)
+      (or (when-let [alias-symb (get (apply zipmap ((juxt vals keys) (ns-aliases *ns*)))
+                                     orig-ns)]
+            (symbol (name alias-symb) symb-str))
+          (when-let [varr (get (ns-refers *ns*) (symbol symb-str))]
+            (when (= (symbol varr) qualified-symb)
+              (symbol symb-str)))
+          (symbol ns-symb-str symb-str)))))
